@@ -4254,7 +4254,7 @@ i.iconfont.js-toggle-search.iconsearch {
 
 .s-search input {
     font-size: 1rem;
-    background: #none;
+    background: none;
     padding: 12px 24px 12px 64px;
     width: 100%;
     outline: 0;
@@ -6137,7 +6137,7 @@ i.iconfont.down {
 }
 
 @keyframes loading {
-    0 {
+    0% {
         transform: translate(0, 0);
         background-color: #ababab
     }
@@ -8048,8 +8048,8 @@ a.toc-link {
     background: #fff;
     color: #21252b
 }
-.hljs::selection,
 .hljs span::selection,
+.hljs::selection ,
 .hljs-ln-line span::selection,
 .hljs-ln-line::selection {
     background: #fff;
