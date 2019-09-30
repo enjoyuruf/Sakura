@@ -391,7 +391,9 @@ pre {
     max-width: 100%;
     overflow: auto;
     text-shadow: none;
-    color: #000
+    color: #000;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 code,
