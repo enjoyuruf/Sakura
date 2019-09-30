@@ -6,7 +6,7 @@
  *
  * @package Akina
  */
-
+$the_cat = get_the_category();
 ?>
 	<article class="post post-list" itemscope="" itemtype="http://schema.org/BlogPosting">
 	<div class="post-entry">
@@ -18,11 +18,12 @@
 			<?php } ?>
 		</div>	
 		<h1 class="entry-title"><a href="<?php the_permalink();?>"><?php the_title();?></a></h1>
-		<div class="p-time">
+		<div class="p-time post-meta">
 		<?php if(is_sticky()) : ?>
 			<i class="iconfont hotpost icon-hot"></i>
 		 <?php endif ?>
-	  	<i class="iconfont icon-time"></i><?php echo poi_time_since(strtotime($post->post_date_gmt)); ?>
+		<span style="margin-right:3px;"><i class="iconfont icon-file"></i><a href="<?php echo esc_url(get_category_link($the_cat[0]->cat_ID)); ?>"><?php echo $the_cat[0]->cat_name; ?></a></span>
+	  	<span><i class="iconfont icon-time"></i><?php echo poi_time_since(strtotime($post->post_date_gmt)); ?></span>
 	  	</div>
 		<?php the_excerpt(); ?>
 		<footer class="entry-footer">

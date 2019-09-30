@@ -1324,7 +1324,7 @@ a:hover {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 70%
+    width: 55%
 }
 
 .entry-title a {
@@ -5057,6 +5057,7 @@ i.iconfont.down {
         height: 52px
     }
     .post-list h1.entry-title {
+        width: 80%;
         margin: 0 0 0 65px;
         font-size: 16px;
         line-height: 30px
