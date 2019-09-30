@@ -8490,4 +8490,6 @@ h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id
 	margin-top:-80px;
 	visibility:hidden
 }
-
+.comment-form-cookies-consent{
+    display: none;
+}
