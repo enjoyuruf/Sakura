@@ -127,4 +127,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
             }else {
                 the_headPattern();
             } */?>
+			<?php if (is_single() || is_page()) { ?>
+                <div style="padding-top:75px"></div>
+			<?php } ?>
 		    <div id="content" class="site-content">

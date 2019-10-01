@@ -10,7 +10,6 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-    <div style="padding-top:75px"></div>
     <?php /* if(akina_option('patternimg') || !get_post_thumbnail_id(get_the_ID())) { */?>
 	<header class="entry-header">
 		<h1 class="entry-title"><?php the_title(); ?></h1>
