@@ -17,12 +17,14 @@ $the_cat = get_the_category();
 			<a href="<?php the_permalink();?>"><div class="overlay"><i class="iconfont icon-text"></i></div><img src="<?php bloginfo('template_url'); ?>/images/random/d-<?php echo rand(1,10)?>.jpg" /></a>
 			<?php } ?>
 		</div>	
-		<h1 class="entry-title"><a href="<?php the_permalink();?>"><?php the_title();?></a></h1>
+		<h1 class="entry-title">
+		<a class="label" href="<?php echo esc_url(get_category_link($the_cat[0]->cat_ID)); ?>"><?php echo $the_cat[0]->cat_name; ?></a>
+		<a href="<?php the_permalink();?>"><?php the_title();?></a>
+		</h1>
 		<div class="p-time post-meta">
 		<?php if(is_sticky()) : ?>
 			<i class="iconfont hotpost icon-hot"></i>
 		 <?php endif ?>
-		<span style="margin-right:3px;"><i class="iconfont icon-file"></i><a href="<?php echo esc_url(get_category_link($the_cat[0]->cat_ID)); ?>"><?php echo $the_cat[0]->cat_name; ?></a></span>
 	  	<span><i class="iconfont icon-time"></i><?php echo poi_time_since(strtotime($post->post_date_gmt)); ?></span>
 	  	</div>
 		<?php the_excerpt(); ?>

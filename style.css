@@ -8493,3 +8493,33 @@ h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id
 .comment-form-cookies-consent{
     display: none;
 }
+.entry-title .label{
+    display: inline-block;
+    padding: 4px 6px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 14px;
+    color: #fff;
+    vertical-align: baseline;
+    white-space: nowrap;
+    background-color: #51aded;
+    position: relative;
+    top: -3px;
+}
+.entry-title .label:after {
+    position: absolute;
+    width: 0;
+    height: 0;
+    vertical-align: top;
+    content: "";
+    top: 8px;
+    right: -3px;
+    border-left: 4px solid #51aded;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+}
+@media (max-width:860px) {
+    .entry-title .label{
+        top: -2px;
+    }
+}
