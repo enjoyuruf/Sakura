@@ -15,10 +15,12 @@ if ( akina_option('theme_skin') ) { ?>
 
 #aplayer-float .aplayer-lrc-current { color: <?php echo akina_option('theme_skin'); ?> !important}
 
-.is-active-link::before, .commentbody:not(:placeholder-shown)~.input-label, .commentbody:focus~.input-label {
+.is-active-link::before, .commentbody:not(:placeholder-shown)~.input-label, .commentbody:focus~.input-label ,.entry-title .label{
     background-color: <?php echo akina_option('theme_skin'); ?> !important
 }
-
+.entry-title .label:after{
+    border-left: 4px solid <?php echo akina_option('theme_skin'); ?>;
+}
 .commentbody:focus {
     border-color: <?php echo akina_option('theme_skin'); ?> !important
 }

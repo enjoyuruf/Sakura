@@ -1326,7 +1326,7 @@ a:hover {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 55%
+    width: 65%
 }
 
 .entry-title a {
@@ -8502,7 +8502,6 @@ h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id
     color: #fff;
     vertical-align: baseline;
     white-space: nowrap;
-    background-color: #51aded;
     position: relative;
     top: -3px;
 }
@@ -8514,7 +8513,6 @@ h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id
     content: "";
     top: 8px;
     right: -3px;
-    border-left: 4px solid #51aded;
     border-top: 4px solid transparent;
     border-bottom: 4px solid transparent;
 }
