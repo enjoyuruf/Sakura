@@ -351,9 +351,12 @@ i {
 blockquote {
     margin: 0;
     padding: 30px 60px;
-    position: relative
+    position: relative;
+    text-align: center;
 }
-
+blockquote p{
+    text-align: left;
+}
 blockquote:before {
     content: "\f10d" !important;
     font-size: 3rem;
