@@ -1,5 +1,5 @@
 /*！
- * Sakura application bundle theme ver 3.2.0
+ * Sakura theme application bundle
  * @author Mashiro
  * @url https://2heng.xin
  * @date 2019.8.3
@@ -8,7 +8,7 @@ mashiro_global.variables = new function () {
     this.skinSecter = true;
 }
 mashiro_global.ini = new function () {
-    this.normalize = function () {
+    this.normalize = function () { // initial functions when page first load (首次加载页面时的初始化函数)
         lazyload();
         social_share();
         post_list_show_animation();
@@ -17,7 +17,7 @@ mashiro_global.ini = new function () {
         checkskinSecter();
         scrollBar();
     }
-    this.pjax = function () {
+    this.pjax = function () { // pjax reload functions (pjax 重载函数)
         pjaxInit();
         social_share();
         post_list_show_animation();
@@ -463,10 +463,10 @@ function timeSeriesReload(flag) {
             var al_expand_collapse_click = 0;
             $('#al_expand_collapse').click(function () {
                 if (al_expand_collapse_click == 0) {
-                    $al_post_list.show();
+                    $al_post_list.show(400);
                     al_expand_collapse_click++;
                 } else if (al_expand_collapse_click == 1) {
-                    $al_post_list.hide();
+                    $al_post_list.hide(400);
                     al_expand_collapse_click--;
                 }
             });
@@ -547,7 +547,7 @@ function tableOfContentScroll(flag) {
     } else {
         if (flag) {
             var id = 1,
-                heading_fix=$("div").hasClass("pattern-attachment-img") ? -75 : 200;
+                heading_fix = mashiro_option.entry_content_theme == "sakura" ? $("article").hasClass("type-post") ? $("div").hasClass("pattern-attachment-img") ? -75 : 200 : 375 : window.innerHeight / 2;
             $(".entry-content , .links").children("h1,h2,h3,h4,h5").each(function() {
                 var hyphenated = "toc-head-" + id;
                 this.id = hyphenated;

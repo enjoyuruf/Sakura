@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.2.5' );
+define( 'SAKURA_VERSION', '3.2.7' );
 define( 'BUILD_VERSION', '3' );
 define( 'JSDELIVR_VERSION', '3.6.7' );
 
@@ -183,6 +183,7 @@ function sakura_scripts() {
         wp_enqueue_style( 'saukra_css', 'https://cdn.jsdelivr.net/gh/mashirozx/Sakura@' . SAKURA_VERSION . '/style.min.css', array(), SAKURA_VERSION );
         wp_enqueue_script( 'app', 'https://cdn.jsdelivr.net/gh/mashirozx/Sakura@' . SAKURA_VERSION . '/js/sakura-app.min.js', array(), SAKURA_VERSION, true );
     } 
+    wp_enqueue_script( 'github_card', 'https://cdn.jsdelivr.net/github-cards/latest/widget.js', array(), SAKURA_VERSION, true );
     
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -548,7 +549,7 @@ function get_link_items(){
   $linkcats = get_terms( 'link_category' );
   	if ( !empty($linkcats) ) {
       	foreach( $linkcats as $linkcat){            
-        	$result .=  '<h3 class="link-title">'.$linkcat->name.'</h3>';
+        	$result .=  '<h3 class="link-title"><span class="link-fix">'.$linkcat->name.'</span></h3>';
         	if( $linkcat->description ) $result .= '<div class="link-description">' . $linkcat->description . '</div>';
         	$result .=  get_the_link_items($linkcat->term_id);
       	}
@@ -1512,30 +1513,38 @@ function codecheese_register_post( $sanitized_user_login, $user_email, $errors )
 
 // html 标签处理器
 function html_tag_parser($content) {  
-    if(!is_feed()) {   
-        $content=preg_replace(
-            '/<img(.+)src=[\'"]([^\'"]+)[\'"](.*)>/i',
-            "<img\$1class=\"lazyload\" data-src=\"\$2\" src=\"https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg\" onerror=\"imgError(this)\"\$3 >\n<noscript>\$0</noscript>",
-            $content
-        ); 
+    if(!is_feed()) {  
+        if(akina_option('lazyload') && akina_option('lazyload_spinner')){
+            $content=preg_replace(
+                '/<img(.+)src=[\'"]([^\'"]+)[\'"](.*)>/i',
+                "<img $1 class=\"lazyload\" data-src=\"$2\" src=\"".akina_option('lazyload_spinner')."\" onerror=\"imgError(this)\" $3 >\n<noscript>$0</noscript>",
+                $content
+            ); 
+        } 
         
         //Fancybox
         /* Markdown Regex Pattern for Matching URLs:             
          * https://daringfireball.net/2010/07/improved_regex_for_matching_urls
          */
-        $url_regex ='(((http|https):\/\/)?(\w(\:\w)?@)?([0-9a-z_-]+\.)*?([a-z0-9-]+\.[a-z]{2,6}(\.[a-z]{2})?(\:[0-9]{2,6})?)((\/[^?#<>\/\\*":]*)+(\?[^#]*)?(#.*)?)?)';
+        $url_regex ='((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:\'".,<>?«»“”‘’]))';
         
         //With Thumbnail: !{alt}(url)[th_url]
-        $content=preg_replace(
-            '/!\{([^\{\}]+)*\}\('.$url_regex.'\)\['.$url_regex.'\]/i',
-            '<a data-fancybox="gallery" 
-                data-caption="$1"
-                class="fancybox" 
-                href="$2" 
-                alt="$1" 
-                title="$1"><img src="$15" target="_blank" rel="nofollow" class="fancybox"></a>',
-            $content
-        ); 
+        if (preg_match_all('/\!\{.*?\)\[.*?\]/i', $content,$matches)){
+        $i=0;
+        foreach ($matches as $val) {
+            $content=str_replace($val[$i],preg_replace(
+                    '/!\{([^\{\}]+)*\}\('.$url_regex.'\)\['.$url_regex.'\]/i',
+                    '<a data-fancybox="gallery" 
+                        data-caption="$1"
+                        class="fancybox" 
+                        href="$2" 
+                        alt="$1" 
+                        title="$1"><img src="$7" target="_blank" rel="nofollow" class="fancybox"></a>',
+                    $val[$i]),
+                $content);
+            $i++;
+            }
+        }
         
         //Without Thumbnail :!{alt}(url)
         $content=preg_replace(
@@ -1546,6 +1555,18 @@ function html_tag_parser($content) {
                 href="$2"
                 alt="$1" 
                 title="$1"><img src="$2" target="_blank" rel="nofollow" class="fancybox"></a>',
+            $content
+        );
+        
+        //Github cards
+        $content=preg_replace(
+            '/\[github repo=[\'"]([^\'"]+)[\'"]\]/i',
+            '
+            <iframe frameborder="0" scrolling="0" allowtransparency="true" 
+                    src="https://api.2heng.xin/github-card/?repo=$1" 
+                    width="400" height="153"
+                    style="margin-left: 50%; transform: translateX(-50%);"></iframe>
+            ',
             $content
         );
     }  
