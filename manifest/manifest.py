@@ -8,6 +8,7 @@ import os
 import sys
 import json
 import hashlib
+import webp
 from PIL import Image
 
 class Single(object):
