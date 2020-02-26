@@ -17,7 +17,6 @@ get_header();
 				<?php echo get_link_items(); ?>
 			</div>
 		</article>
-        <div class="have-toc"></div><div class="toc-container"><div class="toc"></div></div>
 	<?php endwhile; ?>
 <?php
 get_footer();
