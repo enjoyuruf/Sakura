@@ -98,7 +98,7 @@
 
 .entry-content a {
     color: #e67474;
-    text-decoration: underline dotted rgba(0, 0, 0, .1)
+    text-decoration: underline;
 }
 
 .entry-content a:hover {
