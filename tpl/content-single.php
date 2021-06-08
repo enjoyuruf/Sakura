@@ -48,7 +48,7 @@
 						<i class="fa fa-link" style="width:15px"></i>文章链接:
 					</span>
 					<span class="reprint-info">
-						<a href="<?php echo home_url(add_query_arg(array()));  ?>"><?php echo home_url(add_query_arg(array()));  ?></a>
+						<a href="<?php echo $PageURL=explode("?",home_url(add_query_arg(array())))[0];  ?>"><?php echo $PageURL ?></a>
 					</span>
 				</div>
 				<div class="reprint__notice">
