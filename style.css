@@ -1919,13 +1919,16 @@ h1.page-title.mb- {
     }
 }
 .post-footer {
-    padding: 20px 0;
     border-bottom: 1px dashed #ddd;
     border-top: 1px dashed #ddd;
-    margin-top: 30px;
-    height: 82px
+    margin-top: 10px;
+    height: auto
 }
-
+.reprint {
+    padding: 0.5rem 0.8rem;
+    line-height: 2;
+    font-size: 16px;
+}
 .post-lincenses {
     text-align: center;
     padding-bottom: 5px;
@@ -5124,14 +5127,7 @@ i.iconfont.down {
     .entry-content p {
         font-size: 14px
     }
-    .post-footer,
-    .post-like,
-    .post-share {
-        display: none
-    }
     .post-tags {
-        text-align: center;
-        float: none;
         font-size: 12px
     }
     .author-profile {
